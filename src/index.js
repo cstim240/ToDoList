@@ -4,7 +4,7 @@
 
  each individual todo item should have a: title, description, dueDate, priority
 
- todo items are contained in todo folders
+ todo items are contained in todo folders/projects
 */
 
 import './style.css';
@@ -22,7 +22,15 @@ import './style.css';
     });
 })();
 
-//function createCategory(){}
+const categoryFactory = (function(){
+    function createCategory(categoryName){
+        const categoryDiv = document.querySelector('#categoryDiv');
+        const category = document.createElement('p');
+        category.innerText = categoryName;
+        categoryDiv.appendChild(category);
+        //add other functions that allows it to be removed
+    }
+});
 
 //function createToDo(){}
 
