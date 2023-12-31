@@ -14,6 +14,8 @@ import './style.css';
     const categoryBtn = document.querySelector('#categoryBtn');
     categoryBtn.addEventListener('click', () => {
         console.log('categoryBtn event listener works!');
+        categoryPopup();
+
     });
 
     const todoBtn = document.querySelector('#todoBtn');
@@ -22,15 +24,27 @@ import './style.css';
     });
 })();
 
-const categoryFactory = (function(){
+const categoryFactory = (() => {
     function createCategory(categoryName){
         const categoryDiv = document.querySelector('#categoryDiv');
         const category = document.createElement('p');
         category.innerText = categoryName;
         categoryDiv.appendChild(category);
         //add other functions that allows it to be removed
-    }
-});
+    };
+
+    return {
+        createCategory
+    };
+})(); //IIFE as well
+
+//this creates a prompt for the user to fill in category name
+function categoryPopup(){
+    const categoryInput = prompt("Please type category name of to-do list:");
+    const newCategory = categoryFactory.createCategory(categoryInput);
+}
+
+
 
 //function createToDo(){}
 
