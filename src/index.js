@@ -12,7 +12,7 @@ import './style.css';
 //IIFE which adds event listeners to both buttons
 (function (){
     const categoryBtn = document.querySelector('#categoryBtn');
-    categoryBtn.addEventListener('click', () =>{
+    categoryBtn.addEventListener('click', () => {
         console.log('categoryBtn event listener works!');
     });
 
