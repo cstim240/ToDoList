@@ -9,7 +9,7 @@
     "build": "webpack"
   },
   "keywords": [],
-  "author": "",
+  "author": "tim_supan",
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^6.8.1",
