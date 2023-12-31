@@ -5,6 +5,6 @@
  each individual todo item should have a: title, description, dueDate, priority
 
  todo items are contained in todo folders
-
-
 */
+
+import './style.css';
