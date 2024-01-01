@@ -27,10 +27,24 @@ import './style.css';
 const categoryFactory = (() => {
     function createCategory(categoryName){
         const categoryDiv = document.querySelector('#categoryDiv');
-        const category = document.createElement('p');
+        const category = document.createElement('div');
         category.innerText = categoryName;
         categoryDiv.appendChild(category);
         //add other functions that allows it to be removed
+
+        const deleteBtn = createDeleteBtn(categoryDiv, category);
+        categoryDiv.appendChild(deleteBtn);
+        return category;
+    };
+
+    function createDeleteBtn(categoryDiv, category){
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerText = 'X';
+        deleteBtn.addEventListener('click', () => {
+            categoryDiv.removeChild(category);
+            categoryDiv.removeChild(deleteBtn);
+        });
+        return deleteBtn;
     };
 
     return {
