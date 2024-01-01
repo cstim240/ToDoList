@@ -5,6 +5,9 @@
  each individual todo item should have a: title, description, dueDate, priority
 
  todo items are contained in todo folders/projects
+
+ now we have to somehow connect categories to their own to-do items
+ 
 */
 
 import './style.css';
