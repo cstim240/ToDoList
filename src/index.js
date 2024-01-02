@@ -79,26 +79,28 @@ const categoryFactory = (() => {
 //note that you are NOT supposed to append the todo items to category
 const todoFactory = (() => {
     function createToDo(category, todoTitle, todoDescription, toDueDate, todoPriority){
-        const todoDiv = document.createElement('div');
+        const todoDiv = document.createElement('#todoDiv'); //the parent div of todo Items
+
+        const todoItem = document.createElement('div'); //for each item, holds the category, title, descrip, duedate, priority, deleteBtn
         const title = document.createElement('p');
         title.innerText = todoTitle;
-        todoDiv.appendChild(title);
+        todoItem.appendChild(title);
 
         const description = document.createElement('p');
         description.innerText = todoDescription;
-        todoDiv.appendChild(description);
+        todoItem.appendChild(description);
 
         const dueDate = document.createElement('p');
         dueDate.innerText = toDueDate;
-        todoDiv.appendChild(dueDate);
+        todoItem.appendChild(dueDate);
 
         const priority = document.createElement('p');
         priority.innerText = todoPriority;
-        todoDiv.appendChild(priority);
+        todoItem.appendChild(priority);
 
-        const deleteBtn = todoDiv.createDeleteBtn(category, todoDiv);
-        todoDiv.appendChild(deleteBtn);
-        category.appendChild(todoDiv);
+        const deleteBtn = todoDiv.createDeleteBtn(todoDiv, todoItem);
+        todoItem.appendChild(deleteBtn);
+        todoDiv.appendChild(todoItem);
     }
 
     //to do for next session: add a closing button to delete singular to do items
