@@ -46,16 +46,6 @@ const categoryFactory = (() => {
         return category;
     };
 
-    function createDeleteBtn(categoryDiv, category){
-        const deleteBtn = document.createElement('button');
-        deleteBtn.innerText = 'X';
-        deleteBtn.addEventListener('click', () => {
-            categoryDiv.removeChild(category);
-            categoryDiv.removeChild(deleteBtn);
-        });
-        return deleteBtn;
-    };
-
     function makeDivClickable(category){
         category.addEventListener('click', () =>{
             console.log(category + ' has been selected!');
@@ -114,6 +104,16 @@ const todoFactory = (() => {
         createToDo
     }
 })();
+
+function createDeleteBtn(parentDiv, divToDelete){
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerText = 'X';
+    deleteBtn.addEventListener('click', () => {
+        parentDiv.removeChild(divToDelete);
+        parentDiv.removeChild(deleteBtn);
+    });
+    return deleteBtn;
+};
 
 
 
