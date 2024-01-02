@@ -79,7 +79,7 @@ const categoryFactory = (() => {
 //note that you are NOT supposed to append the todo items to category
 const todoFactory = (() => {
     function createToDo(category, todoTitle, todoDescription, toDueDate, todoPriority){
-        const todoDiv = document.createElement('#todoDiv'); //the parent div of todo Items
+        const todoDiv = document.querySelector('#todoDiv'); //the parent div of todo Items
 
         const todoItem = document.createElement('div'); //for each item, holds the category, title, descrip, duedate, priority, deleteBtn
         const title = document.createElement('p');
@@ -98,7 +98,7 @@ const todoFactory = (() => {
         priority.innerText = todoPriority;
         todoItem.appendChild(priority);
 
-        const deleteBtn = todoDiv.createDeleteBtn(todoDiv, todoItem);
+        const deleteBtn = createDeleteBtn(todoDiv, todoItem);
         todoItem.appendChild(deleteBtn);
         todoDiv.appendChild(todoItem);
     }
@@ -116,7 +116,6 @@ function createDeleteBtn(parentDiv, divToDelete){
     deleteBtn.innerText = 'X';
     deleteBtn.addEventListener('click', () => {
         parentDiv.removeChild(divToDelete);
-        parentDiv.removeChild(deleteBtn);
     });
     return deleteBtn;
 };
