@@ -155,6 +155,7 @@ function createDeleteBtn(parentDiv, divToDelete){
 }
 
 //NOTE: still doesn't work at the moment, will wipe out todos on the first switch, but subsequent removal does not work
+//look into how the current sanitizedCategoryName is set
 function wipeAllToDos(sanitizedCategoryName){
     const todoDiv = document.querySelector('#todoDiv');
     const todosToRemove = todoFactory.todoArray.filter(todo => todo.category !== sanitizedCategoryName);
