@@ -67,9 +67,17 @@ const categoryFactory = (() => {
     function selectDiv(category){
         const todoBtn = document.querySelector('#todoBtn');
         todoBtn.addEventListener('click', () => {
-        console.log('todoBtn event listener works!');
-        const toDo = todoFactory.createToDo(category);
+            console.log('todoBtn event listener works!');
+            todoPopup(category);
         });
+    }
+
+    function todoPopup(category){
+        const todoTitle = prompt('Please type the title of your to-do: ');
+        const todoDescription = prompt('Please type the description of this to-do:');
+        const toDueDate = prompt('When do you plan to-do this? ');
+        const todoPriority = prompt('Is this to-do a low, moderate, or high priorty? ');
+        const todoItem = todoFactory.createToDo(category, todoTitle, todoDescription, dueDate, toDueDate, todoPriority)
     }
 
     return {
@@ -79,7 +87,8 @@ const categoryFactory = (() => {
 
 const todoFactory = (() => {
     function createToDo(category){
-        const underCategory = document.querySelector(category);
+        const underCategory = document.querySelector(category, todoTitle, todoDescription, dueDate, toDueDate, todoPriority);
+        const title = document.createElement('div');
         //please fix
     }
 })();
