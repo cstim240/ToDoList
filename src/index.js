@@ -76,6 +76,7 @@ const categoryFactory = (() => {
     };
 })(); //IIFE as well
 
+//note that you are NOT supposed to append the todo items to category
 const todoFactory = (() => {
     function createToDo(category, todoTitle, todoDescription, toDueDate, todoPriority){
         const todoDiv = document.createElement('div');
@@ -95,6 +96,8 @@ const todoFactory = (() => {
         priority.innerText = todoPriority;
         todoDiv.appendChild(priority);
 
+        const deleteBtn = todoDiv.createDeleteBtn(category, todoDiv);
+        todoDiv.appendChild(deleteBtn);
         category.appendChild(todoDiv);
     }
 
@@ -105,6 +108,7 @@ const todoFactory = (() => {
     }
 })();
 
+//to be used in both category and todoFactory functions
 function createDeleteBtn(parentDiv, divToDelete){
     const deleteBtn = document.createElement('button');
     deleteBtn.innerText = 'X';
