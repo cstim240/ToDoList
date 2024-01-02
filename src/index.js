@@ -8,6 +8,9 @@
 
  now we have to somehow connect categories to their own to-do items
  
+ when a user selects a different category, all the to-do items belonging in that category (via class) should load
+ and prior to this should also wipe out the #todoDiv from ALL to-do items
+ so in other words, clicking on a category activates deleteAlltodos() and loadToDos(category)
 */
 
 import './style.css';
@@ -48,8 +51,8 @@ const categoryFactory = (() => {
     function makeDivClickable(category){
         category.addEventListener('click', () =>{
             console.log(category + ' has been selected!');
+            selectDiv(category);
         });
-        selectDiv(category);
     }
 
     //adds eventlistener to todoBtn, after clicking it, 
@@ -60,6 +63,7 @@ const categoryFactory = (() => {
             console.log('todoBtn event listener works!');
             todoPopup(category);
         });
+        wipeAllToDos();
     }
 
     function todoPopup(category){
@@ -67,7 +71,7 @@ const categoryFactory = (() => {
         const todoDescription = prompt('Please type the description of this to-do:');
         const toDueDate = prompt('When do you plan to-do this? ');
         const todoPriority = prompt('Is this to-do a low, moderate, or high priorty? ');
-        const todoItem = todoFactory.createToDo(category, todoTitle, todoDescription, toDueDate, todoPriority)
+        const todoItem = todoFactory.createToDo(category, todoTitle, todoDescription, toDueDate, todoPriority);
     }
 
     return {
@@ -116,6 +120,16 @@ function createDeleteBtn(parentDiv, divToDelete){
     });
     return deleteBtn;
 };
+
+function wipeAllToDos(){
+    const todoDiv = document.querySelector('#todoDiv');
+    if (todoDiv.hasChildNodes()){
+        //the .firstChild checks for a child node, if so, removes them
+        while (todoDiv.firstChild){
+            todoDiv.removeChild(todoDiv.firstChild);
+        }
+    }
+}
 
 
 
