@@ -21,10 +21,6 @@ import './style.css';
 
     });
 
-    const todoBtn = document.querySelector('#todoBtn');
-    todoBtn.addEventListener('click', () => {
-        console.log('todoBtn event listener works!');
-    });
 })();
 
 //this creates a prompt for the user to fill in category name
@@ -64,6 +60,16 @@ const categoryFactory = (() => {
             console.log(category + ' has been selected!');
         });
         selectDiv(category);
+    }
+
+    //adds eventlistener to todoBtn, after clicking it, 
+    //it activates todoFactory to create a todo object!
+    function selectDiv(category){
+        const todoBtn = document.querySelector('#todoBtn');
+        todoBtn.addEventListener('click', () => {
+        console.log('todoBtn event listener works!');
+        const toDo = todoFactory.createToDo(category);
+        });
     }
 
     return {
