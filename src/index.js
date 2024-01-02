@@ -1,6 +1,6 @@
 //import statements (other js files, photos, )
 /*
- to do brainstorm 
+ to do brainstorm: 
 
  each individual todo item should have a: title, description, dueDate, priority
 
@@ -34,44 +34,63 @@ function categoryPopup(){
 }
 
 const categoryFactory = (() => {
+    const categoryArray = [];
+
     function createCategory(categoryName){
         const categoryDiv = document.querySelector('#categoryDiv');
         const category = document.createElement('div');
+
+        const sanitizedCategoryName = categoryName.replace(/\s/g); 
+        /*uses regex:
+        the '/ ... /' are delimiters signifying the start and end of regular expressions
+        the '\s' matches any whitespace character (or space)
+        the 'g' is a flag for global search. It ensures the regex matches ALL whitespace chars instead of stopping at the first instance
+        */
+
         category.innerText = categoryName;
-        category.classList.add(categoryName);
+        category.classList.add(sanitizedCategoryName);
         categoryDiv.appendChild(category);
 
         const deleteBtn = createDeleteBtn(categoryDiv, category);
         categoryDiv.appendChild(deleteBtn);
 
         makeDivClickable(category);
+
+        const categoryObj = {
+            name: sanitizedCategoryName,
+            element: category,
+        }
+
+        categoryArray.push(categoryObj);
+
         return category;
     };
 
-    function makeDivClickable(category){
+    function makeDivClickable(category, sanitizedCategoryName){
         category.addEventListener('click', () =>{
             console.log(category + ' has been selected!');
-            selectDiv(category);
+            selectDiv(sanitizedCategoryName);
         });
     }
 
     //adds eventlistener to todoBtn, after clicking it, 
     //it activates todoFactory to create a todo object!
-    function selectDiv(category){
+    function selectDiv(sanitizedCategoryName){
         const todoBtn = document.querySelector('#todoBtn');
+        wipeAllToDos();
+        loadExistingToDos(); //work in progress
         todoBtn.addEventListener('click', () => {
             console.log('todoBtn event listener works!');
-            todoPopup(category);
+            todoPopup(sanitizedCategoryName);
         });
-        wipeAllToDos();
     }
 
-    function todoPopup(category){
+    function todoPopup(sanitizedCategoryName){
         const todoTitle = prompt('Please type the title of your to-do: ');
         const todoDescription = prompt('Please type the description of this to-do:');
         const toDueDate = prompt('When do you plan to-do this? ');
         const todoPriority = prompt('Is this to-do a low, moderate, or high priorty? ');
-        const todoItem = todoFactory.createToDo(category, todoTitle, todoDescription, toDueDate, todoPriority);
+        const todoItem = todoFactory.createToDo(sanitizedCategoryName, todoTitle, todoDescription, toDueDate, todoPriority);
     }
 
     return {
@@ -80,7 +99,9 @@ const categoryFactory = (() => {
 })(); //IIFE as well
 
 const todoFactory = (() => {
-    function createToDo(category, todoTitle, todoDescription, toDueDate, todoPriority){
+    const todoArray = [];
+
+    function createToDo(sanitizedCategoryName, todoTitle, todoDescription, toDueDate, todoPriority){
         const todoDiv = document.querySelector('#todoDiv'); //the parent div of todo Items
 
         const todoItem = document.createElement('div'); //for each item, holds the category, title, descrip, duedate, priority, deleteBtn
@@ -103,11 +124,23 @@ const todoFactory = (() => {
 
         const deleteBtn = createDeleteBtn(todoDiv, todoItem);
         todoItem.appendChild(deleteBtn);
+
+        todoItem.classList.add(sanitizedCategoryName);
         todoDiv.appendChild(todoItem);
+
+        const todoItemObj = {
+            category: sanitizedCategoryName,
+            title: todoTitle,
+            description: todoDescription,
+            dueDate: toDueDate,
+            priority: todoPriority,
+            element: todoItem
+        }
+        todoArray.push(todoItemObj);
     }
 
     return {
-        createToDo
+        createToDo, todoArray
     }
 })();
 
@@ -119,7 +152,7 @@ function createDeleteBtn(parentDiv, divToDelete){
         parentDiv.removeChild(divToDelete);
     });
     return deleteBtn;
-};
+}
 
 function wipeAllToDos(){
     const todoDiv = document.querySelector('#todoDiv');
@@ -131,10 +164,15 @@ function wipeAllToDos(){
     }
 }
 
+function loadExistingToDos(categoryName) {
+    const todoDiv = document.querySelector('#todoDiv');
+    const todos = todoFactory.todoArray.filter(todo => todo.category == categoryName);
+    //returns an array of todos from: the array called todoArray which have the category == categoryName
 
-
-
-//function createToDo(){}
+    todos.forEach(todo => {
+        todoDiv.appendChild(todo.element);
+    });
+}
 
 
 
