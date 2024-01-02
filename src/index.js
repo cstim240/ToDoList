@@ -54,7 +54,7 @@ const categoryFactory = (() => {
         const deleteBtn = createDeleteBtn(categoryDiv, category);
         categoryDiv.appendChild(deleteBtn);
 
-        makeDivClickable(category);
+        makeDivClickable(category, sanitizedCategoryName);
 
         const categoryObj = {
             name: sanitizedCategoryName,
@@ -90,7 +90,7 @@ const categoryFactory = (() => {
         const todoDescription = prompt('Please type the description of this to-do:');
         const toDueDate = prompt('When do you plan to-do this? ');
         const todoPriority = prompt('Is this to-do a low, moderate, or high priorty? ');
-        const todoItem = todoFactory.createToDo(sanitizedCategoryName, todoTitle, todoDescription, toDueDate, todoPriority);
+        todoFactory.createToDo(sanitizedCategoryName, todoTitle, todoDescription, toDueDate, todoPriority);
     }
 
     return {
@@ -154,13 +154,14 @@ function createDeleteBtn(parentDiv, divToDelete){
     return deleteBtn;
 }
 
-function wipeAllToDos(){
+//NOTE: still doesn't work at the moment, will wipe out todos on the first switch, but subsequent removal does not work
+function wipeAllToDos(sanitizedCategoryName){
     const todoDiv = document.querySelector('#todoDiv');
-    if (todoDiv.hasChildNodes()){
-        //the .firstChild checks for a child node, if so, removes them
-        while (todoDiv.firstChild){
-            todoDiv.removeChild(todoDiv.firstChild);
-        }
+    const todosToRemove = todoFactory.todoArray.filter(todo => todo.category !== sanitizedCategoryName);
+    if (todosToRemove){
+        todosToRemove.forEach(todo => {
+            todoDiv.removeChild(todo.element);
+        });
     }
 }
 
@@ -168,10 +169,11 @@ function loadExistingToDos(sanitizedCategoryName) {
     const todoDiv = document.querySelector('#todoDiv');
     const todos = todoFactory.todoArray.filter(todo => todo.category === sanitizedCategoryName);
     //returns an array of todos from: the array called todoArray which have the category == categoryName
-
-    todos.forEach(todo => {
-        todoDiv.appendChild(todo.element);
-    });
+    if (todos){
+        todos.forEach(todo => {
+            todoDiv.appendChild(todo.element);
+        });
+    }
 }
 
 
