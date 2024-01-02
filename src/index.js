@@ -44,6 +44,8 @@ const categoryFactory = (() => {
 
         const deleteBtn = createDeleteBtn(categoryDiv, category);
         categoryDiv.appendChild(deleteBtn);
+
+        makeDivClickable(category);
         return category;
     };
 
@@ -57,6 +59,13 @@ const categoryFactory = (() => {
         return deleteBtn;
     };
 
+    function makeDivClickable(category){
+        category.addEventListener('click', () =>{
+            console.log(category + ' has been selected!');
+        });
+        selectDiv(category);
+    }
+
     return {
         createCategory
     };
@@ -64,7 +73,8 @@ const categoryFactory = (() => {
 
 const todoFactory = (() => {
     function createToDo(category){
-        const category = document.querySelector('#')
+        const underCategory = document.querySelector(category);
+        //please fix
     }
 })();
 
