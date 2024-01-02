@@ -37,7 +37,6 @@ const categoryFactory = (() => {
         category.innerText = categoryName;
         category.classList.add(categoryName);
         categoryDiv.appendChild(category);
-        //add other functions that allows it to be removed
 
         const deleteBtn = createDeleteBtn(categoryDiv, category);
         categoryDiv.appendChild(deleteBtn);
@@ -76,12 +75,12 @@ const categoryFactory = (() => {
     };
 })(); //IIFE as well
 
-//note that you are NOT supposed to append the todo items to category
 const todoFactory = (() => {
     function createToDo(category, todoTitle, todoDescription, toDueDate, todoPriority){
         const todoDiv = document.querySelector('#todoDiv'); //the parent div of todo Items
 
         const todoItem = document.createElement('div'); //for each item, holds the category, title, descrip, duedate, priority, deleteBtn
+
         const title = document.createElement('p');
         title.innerText = todoTitle;
         todoItem.appendChild(title);
@@ -102,8 +101,6 @@ const todoFactory = (() => {
         todoItem.appendChild(deleteBtn);
         todoDiv.appendChild(todoItem);
     }
-
-    //to do for next session: add a closing button to delete singular to do items
 
     return {
         createToDo
