@@ -26,6 +26,7 @@ import './style.css';
 //this creates a prompt for the user to fill in category name
 function categoryPopup(){
     const categoryInput = prompt("Please type category name of to-do list:");
+    //bug to fix: if a space is found inside the categoryInput, an error occurs
     const newCategory = categoryFactory.createCategory(categoryInput);
 }
 
@@ -106,6 +107,8 @@ const todoFactory = (() => {
 
         category.appendChild(todoDiv);
     }
+
+    //to do for next session: add a closing button to delete singular to do items
 
     return {
         createToDo
