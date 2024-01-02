@@ -77,7 +77,7 @@ const categoryFactory = (() => {
         const todoDescription = prompt('Please type the description of this to-do:');
         const toDueDate = prompt('When do you plan to-do this? ');
         const todoPriority = prompt('Is this to-do a low, moderate, or high priorty? ');
-        const todoItem = todoFactory.createToDo(category, todoTitle, todoDescription, dueDate, toDueDate, todoPriority)
+        const todoItem = todoFactory.createToDo(category, todoTitle, todoDescription, toDueDate, todoPriority)
     }
 
     return {
@@ -86,10 +86,29 @@ const categoryFactory = (() => {
 })(); //IIFE as well
 
 const todoFactory = (() => {
-    function createToDo(category){
-        const underCategory = document.querySelector(category, todoTitle, todoDescription, dueDate, toDueDate, todoPriority);
-        const title = document.createElement('div');
-        //please fix
+    function createToDo(category, todoTitle, todoDescription, toDueDate, todoPriority){
+        const todoDiv = document.createElement('div');
+        const title = document.createElement('p');
+        title.innerText = todoTitle;
+        todoDiv.appendChild(title);
+
+        const description = document.createElement('p');
+        description.innerText = todoDescription;
+        todoDiv.appendChild(description);
+
+        const dueDate = document.createElement('p');
+        dueDate.innerText = toDueDate;
+        todoDiv.appendChild(dueDate);
+
+        const priority = document.createElement('p');
+        priority.innerText = todoPriority;
+        todoDiv.appendChild(priority);
+
+        category.appendChild(todoDiv);
+    }
+
+    return {
+        createToDo
     }
 })();
 
