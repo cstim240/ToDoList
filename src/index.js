@@ -78,7 +78,7 @@ const categoryFactory = (() => {
     function selectDiv(sanitizedCategoryName){
         const todoBtn = document.querySelector('#todoBtn');
         wipeAllToDos();
-        loadExistingToDos(); //work in progress
+        loadExistingToDos(sanitizedCategoryName); //work in progress
         todoBtn.addEventListener('click', () => {
             console.log('todoBtn event listener works!');
             todoPopup(sanitizedCategoryName);
@@ -164,9 +164,9 @@ function wipeAllToDos(){
     }
 }
 
-function loadExistingToDos(categoryName) {
+function loadExistingToDos(sanitizedCategoryName) {
     const todoDiv = document.querySelector('#todoDiv');
-    const todos = todoFactory.todoArray.filter(todo => todo.category == categoryName);
+    const todos = todoFactory.todoArray.filter(todo => todo.category === sanitizedCategoryName);
     //returns an array of todos from: the array called todoArray which have the category == categoryName
 
     todos.forEach(todo => {
