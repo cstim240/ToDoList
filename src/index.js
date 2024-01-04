@@ -161,7 +161,7 @@ function createDeleteBtn(parentDiv, divToDelete){
 function wipeAllToDos(sanitizedCategoryName){
     const todoDiv = document.querySelector('#todoDiv');
     const todosToRemove = todoFactory.todoArray.filter(todo => todo.category !== sanitizedCategoryName);
-    if (todosToRemove && todoDiv){
+    if (todosToRemove){
         todosToRemove.forEach(todo => {
             todoDiv.removeChild(todo.element);
         });
