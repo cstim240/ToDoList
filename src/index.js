@@ -54,14 +54,16 @@ const categoryFactory = (() => {
         const deleteBtn = createDeleteBtn(categoryDiv, category);
         categoryDiv.appendChild(deleteBtn);
 
-        makeDivClickable(category, sanitizedCategoryName);
-
         const categoryObj = {
             name: sanitizedCategoryName,
             element: category,
         }
-
+        
         categoryArray.push(categoryObj);
+
+        makeDivClickable(category, categoryObj.name);
+
+        
 
         return category;
     };
@@ -159,7 +161,7 @@ function createDeleteBtn(parentDiv, divToDelete){
 function wipeAllToDos(sanitizedCategoryName){
     const todoDiv = document.querySelector('#todoDiv');
     const todosToRemove = todoFactory.todoArray.filter(todo => todo.category !== sanitizedCategoryName);
-    if (todosToRemove){
+    if (todosToRemove && todoDiv){
         todosToRemove.forEach(todo => {
             todoDiv.removeChild(todo.element);
         });
