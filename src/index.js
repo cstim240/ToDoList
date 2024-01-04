@@ -156,6 +156,8 @@ function createDeleteBtn(parentDiv, divToDelete){
 
 //NOTE: still doesn't work at the moment, will wipe out todos on the first switch, but subsequent removal does not work
 //look into how the current sanitizedCategoryName is set
+//found the problem: its currently in how the makeDivClickable, after a category's initial
+//creation, we had no way of acquiring the sanitizedCategoryName so it becomes undefined after subsequent calls
 function wipeAllToDos(sanitizedCategoryName){
     const todoDiv = document.querySelector('#todoDiv');
     const todosToRemove = todoFactory.todoArray.filter(todo => todo.category !== sanitizedCategoryName);
