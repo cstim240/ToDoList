@@ -40,7 +40,7 @@ const categoryFactory = (() => {
         const categoryDiv = document.querySelector('#categoryDiv');
         const category = document.createElement('div');
 
-        const sanitizedCategoryName = categoryName.replace(/\s/g); 
+        const sanitizedCategoryName = categoryName.replace(/\s/g, ''); 
         /*uses regex:
         the '/ ... /' are delimiters signifying the start and end of regular expressions
         the '\s' matches any whitespace character (or space)
@@ -49,35 +49,46 @@ const categoryFactory = (() => {
 
         category.innerText = categoryName;
         category.classList.add(sanitizedCategoryName);
+        category.dataset.sanitizedCategoryName = sanitizedCategoryName;
+        //note
+
         categoryDiv.appendChild(category);
 
         const deleteBtn = createDeleteBtn(categoryDiv, category);
         categoryDiv.appendChild(deleteBtn);
 
+        let selectedCategoryName;
+
+        category.addEventListener('click', () => {
+            selectedCategoryName = category.dataset.sanitizedCategoryName;
+            console.log(selectedCategoryName + ' has been selected!');
+            selectDiv(selectedCategoryName);
+        });
+
         const categoryObj = {
-            name: sanitizedCategoryName,
+            name: selectedCategoryName,
             element: category,
         }
 
         categoryArray.push(categoryObj);
 
-        makeDivClickable(category, categoryObj.name);
-
         return category;
     };
 
+    /*
     function makeDivClickable(category, sanitizedCategoryName){
         category.addEventListener('click', () =>{
             console.log(category + ' has been selected!');
             selectDiv(sanitizedCategoryName);
         });
     }
+    */
 
     //adds eventlistener to todoBtn, after clicking it, 
     //it activates todoFactory to create a todo object!
     function selectDiv(sanitizedCategoryName){
         const todoBtn = document.querySelector('#todoBtn');
-        wipeAllToDos();
+        wipeAllToDos(sanitizedCategoryName);
         loadExistingToDos(sanitizedCategoryName); //work in progress
         todoBtn.addEventListener('click', () => {
             console.log('todoBtn event listener works!');
