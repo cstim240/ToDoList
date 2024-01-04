@@ -58,12 +58,10 @@ const categoryFactory = (() => {
             name: sanitizedCategoryName,
             element: category,
         }
-        
+
         categoryArray.push(categoryObj);
 
         makeDivClickable(category, categoryObj.name);
-
-        
 
         return category;
     };
@@ -96,7 +94,7 @@ const categoryFactory = (() => {
     }
 
     return {
-        createCategory
+        createCategory, categoryArray
     };
 })(); //IIFE as well
 
