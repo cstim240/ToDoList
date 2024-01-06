@@ -136,6 +136,9 @@ const todoFactory = (() => {
         const deleteBtn = createDeleteBtn(todoDiv, todoItem);
         todoItem.appendChild(deleteBtn);
 
+        const editBtn = createEditBtn(todoDiv, todoItem);
+        todoItem.appendChild(editBtn);
+
         todoItem.classList.add(sanitizedCategoryName);
         todoDiv.appendChild(todoItem);
 
@@ -163,6 +166,15 @@ function createDeleteBtn(parentDiv, divToDelete){
         parentDiv.removeChild(divToDelete);
     });
     return deleteBtn;
+}
+
+function createEditBtn(todoDiv, todoItem){
+    const editBtn = document.createElement('button');
+    editBtn.innerText = 'Edit';
+    editBtn.addEventListener('click', () =>{
+        
+    });
+    return editBtn;
 }
 
 //new bug: ghost second click of adding a todo item on a second category
