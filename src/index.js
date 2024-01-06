@@ -2,7 +2,7 @@
 /*
  to do brainstorm: 
 
- each individual todo item should have a: title, description, dueDate, priority
+ each individual todo item should have a: title, description, dueDate, priority, deleteBtn, editBtn
 
  todo items are contained in todo folders/projects
 
@@ -175,8 +175,6 @@ function wipeAllToDos(sanitizedCategoryName){
         });
     }
 }
-
-//update: 
 
 function loadExistingToDos(sanitizedCategoryName) {
     const todoDiv = document.querySelector('#todoDiv');
