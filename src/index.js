@@ -118,18 +118,22 @@ const todoFactory = (() => {
         const todoItem = document.createElement('div'); //for each item, holds the category, title, descrip, duedate, priority, deleteBtn
 
         const title = document.createElement('p');
+        title.classList.add('itemTitle');
         title.innerText = todoTitle;
         todoItem.appendChild(title);
 
         const description = document.createElement('p');
+        description.classList.add('itemDescription');
         description.innerText = todoDescription;
         todoItem.appendChild(description);
 
         const dueDate = document.createElement('p');
+        dueDate.classList.add('itemDueDate');
         dueDate.innerText = toDueDate;
         todoItem.appendChild(dueDate);
 
         const priority = document.createElement('p');
+        priority.classList.add('itemPriority');
         priority.innerText = todoPriority;
         todoItem.appendChild(priority);
 
@@ -179,7 +183,29 @@ function createEditBtn(todoItem){
 }
 
 function editItem(item){
-    
+    const newTitle = prompt('Enter new title:');
+    if (newTitle !== null){
+        item.title = newTitle;
+        item.element.querySelector('.itemTitle').innerText = newTitle;
+    }
+
+    const newDescription = prompt('Enter new description:');
+    if (newDescription !== null){
+        item.description = newDescription;
+        item.element.querySelector('.itemDescription').innerText = newDescription;
+    }
+
+    const newDueDate = prompt('Enter new due date:');
+    if (newDueDate !== null){
+        item.dueDate = newDueDate;
+        item.element.querySelector('.itemDueDate').innerText = newDueDate;
+    }
+
+    const newPriority = prompt('Enter new priority level:');
+    if (newPriority !== null){
+        item.priority = newPriority;
+        item.element.querySelector('.itemPriority').innerText = newPriority;
+    }
 }
 
 //new bug: ghost second click of adding a todo item on a second category
