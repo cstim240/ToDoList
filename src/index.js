@@ -14,17 +14,26 @@
 */
 
 import './style.css';
+import AirDatepicker from 'air-datepicker';
+import 'air-datepicker/air-datepicker.css';
 
 //IIFE which adds event listeners to both buttons
 (function (){
+    summonDatePicker();
     const categoryBtn = document.querySelector('#categoryBtn');
     categoryBtn.addEventListener('click', () => {
         console.log('categoryBtn event listener works!');
         categoryPopup();
 
     });
-
 })();
+//figure out necessary functions from Airdatepicker api to get date from user
+function summonDatePicker(){
+    const date = new AirDatepicker('#category', {
+        inline: true
+    });
+    console.log("the date is ", date.view());
+};
 
 //this creates a prompt for the user to fill in category name
 function categoryPopup(){
