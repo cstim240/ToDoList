@@ -20,7 +20,6 @@ import localeEn from 'air-datepicker/locale/en';
 
 //IIFE which adds event listeners to both buttons
 (function (){
-    summonDatePicker();
     const categoryBtn = document.querySelector('#categoryBtn');
     categoryBtn.addEventListener('click', () => {
         console.log('categoryBtn event listener works!');
@@ -28,13 +27,7 @@ import localeEn from 'air-datepicker/locale/en';
 
     });
 })();
-//figure out necessary functions from Airdatepicker api to get date from user
-function summonDatePicker(){
-    const date = new AirDatepicker('#category', {
-        locale: localeEn
-    });
-    console.log("the date is ", date.view);
-};
+
 
 //this creates a prompt for the user to fill in category name
 function categoryPopup(){
@@ -84,15 +77,6 @@ const categoryFactory = (() => {
 
         return category;
     };
-
-    /*
-    function makeDivClickable(category, sanitizedCategoryName){
-        category.addEventListener('click', () =>{
-            console.log(category + ' has been selected!');
-            selectDiv(sanitizedCategoryName);
-        });
-    }
-    */
 
     //adds eventlistener to todoBtn, after clicking it, 
     //it activates todoFactory to create a todo object!
