@@ -91,11 +91,22 @@ const categoryFactory = (() => {
     }
 
     function todoPopup(sanitizedCategoryName){
-        const todoTitle = prompt('Please type the title of your to-do: ');
-        const todoDescription = prompt('Please type the description of this to-do:');
-        const toDueDate = prompt('When do you plan to-do this? ');
-        const todoPriority = prompt('Is this to-do a low, moderate, or high priorty? ');
-        todoFactory.createToDo(sanitizedCategoryName, todoTitle, todoDescription, toDueDate, todoPriority);
+        const todos = document.querySelector('#todos');
+        var toDueDate;
+        const datePicker = new AirDatepicker(todos, {
+            locale: localeEn,
+            autoClose: true,
+            dateFormat: "yyyy-MMM-dd",
+            onSelect: function(formattedDate, date, inst){
+                toDueDate = formattedDate.formattedDate;
+                console.log("Selected date: ", toDueDate);
+                const todoTitle = prompt('Please type the title of your to-do: ');
+                const todoDescription = prompt('Please type the description of this to-do:');
+                const todoPriority = prompt('Is this to-do a low, moderate, or high priorty? ');
+                todoFactory.createToDo(sanitizedCategoryName, todoTitle, todoDescription, toDueDate, todoPriority);
+            }
+//figure out how to remove datePicker after taking in date
+        });
     }
 
     return {
