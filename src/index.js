@@ -16,6 +16,7 @@
 import './style.css';
 import AirDatepicker from 'air-datepicker';
 import 'air-datepicker/air-datepicker.css';
+import localeEn from 'air-datepicker/locale/en';
 
 //IIFE which adds event listeners to both buttons
 (function (){
@@ -30,9 +31,9 @@ import 'air-datepicker/air-datepicker.css';
 //figure out necessary functions from Airdatepicker api to get date from user
 function summonDatePicker(){
     const date = new AirDatepicker('#category', {
-        inline: true
+        locale: localeEn
     });
-    console.log("the date is ", date.view());
+    console.log("the date is ", date.view);
 };
 
 //this creates a prompt for the user to fill in category name
