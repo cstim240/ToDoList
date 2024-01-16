@@ -39,10 +39,10 @@ import localeEn from 'air-datepicker/locale/en';
     });
 })();
 
+//now we just need to load category Array from json
 function populateStorage(){
-//implement storing categories (would likely have to be the array itself)
+    localStorage.setItem('categories', JSON.stringify(categoryFactory.categoryArray));
 }
-
 
 //this creates a prompt for the user to fill in category name
 function categoryPopup(){
@@ -90,9 +90,9 @@ const categoryFactory = (() => {
 
         categoryArray.push(categoryObj);
 
-        /*if (!localStorage.getItem('category')){
+        if (!localStorage.getItem('category')){
             populateStorage();
-        }*/
+        }
 
         return category;
     };
