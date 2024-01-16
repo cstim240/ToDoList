@@ -90,9 +90,9 @@ const categoryFactory = (() => {
 
         categoryArray.push(categoryObj);
 
-        if (!localStorage.getItem('category')){
+        /*if (!localStorage.getItem('category')){
             populateStorage();
-        }
+        }*/
 
         return category;
     };
@@ -111,8 +111,10 @@ const categoryFactory = (() => {
 
     function todoPopup(sanitizedCategoryName){
         const todos = document.querySelector('#todos');
+        const calendarHolder = document.createElement('div');
+        todos.appendChild(calendarHolder);
         var toDueDate;
-        const datePicker = new AirDatepicker(todos, {
+        const datePicker = new AirDatepicker(calendarHolder, {
             locale: localeEn,
             autoClose: true,
             dateFormat: "yyyy-MMM-dd",
@@ -123,8 +125,8 @@ const categoryFactory = (() => {
                 const todoDescription = prompt('Please type the description of this to-do:');
                 const todoPriority = prompt('Is this to-do a low, moderate, or high priorty? ');
                 todoFactory.createToDo(sanitizedCategoryName, todoTitle, todoDescription, toDueDate, todoPriority);
-            }
-//figure out how to remove datePicker after taking in date
+                removeCalendar(todos, calendarHolder);
+            },
         });
     }
 
@@ -132,6 +134,10 @@ const categoryFactory = (() => {
         createCategory, categoryArray
     };
 })(); //IIFE as well
+
+function removeCalendar(todos, calendarHolder){
+    todos.removeChild(calendarHolder);
+}
 
 const todoFactory = (() => {
     const todoArray = [];
