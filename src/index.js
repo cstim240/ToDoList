@@ -125,7 +125,7 @@ const categoryFactory = (() => {
                 const todoDescription = prompt('Please type the description of this to-do:');
                 const todoPriority = prompt('Is this to-do a low, moderate, or high priorty? ');
                 todoFactory.createToDo(sanitizedCategoryName, todoTitle, todoDescription, toDueDate, todoPriority);
-                removeCalendar(todos, calendarHolder);
+                todos.removeChild(calendarHolder);
             },
         });
     }
@@ -134,10 +134,6 @@ const categoryFactory = (() => {
         createCategory, categoryArray
     };
 })(); //IIFE as well
-
-function removeCalendar(todos, calendarHolder){
-    todos.removeChild(calendarHolder);
-}
 
 const todoFactory = (() => {
     const todoArray = [];
