@@ -35,14 +35,8 @@ import localeEn from 'air-datepicker/locale/en';
     categoryBtn.addEventListener('click', () => {
         console.log('categoryBtn event listener works!');
         categoryPopup();
-
     });
 })();
-
-//now we just need to load category Array from json
-function populateStorage(){
-    localStorage.setItem('categories', JSON.stringify(categoryFactory.categoryArray));
-}
 
 //this creates a prompt for the user to fill in category name
 function categoryPopup(){
@@ -68,7 +62,6 @@ const categoryFactory = (() => {
         category.innerText = categoryName;
         category.classList.add(sanitizedCategoryName);
         category.dataset.sanitizedCategoryName = sanitizedCategoryName;
-        //note
 
         categoryDiv.appendChild(category);
 
@@ -90,12 +83,27 @@ const categoryFactory = (() => {
 
         categoryArray.push(categoryObj);
 
-        if (!localStorage.getItem('category')){
-            populateStorage();
+        if (!localStorage.getItem('categories')){
+            const categoryArr = JSON.stringify(categoryFactory.categoryArray);
+            localStorage.setItem('categories', categoryArr); //categories will be the key in key-value pair
+            console.log("Category array: ", categoryArr);
         }
 
+        loadCategoriesFromStorage();
+        console.log(categoryArray);
+        
         return category;
     };
+
+    function loadCategoriesFromStorage(){
+        const storedCategories = localStorage.getItem('categories');
+        if (storedCategories){
+            const parsedCategories = JSON.parse(storedCategories);
+            parsedCategories.forEach(category => {
+                createCategory(category.name);
+            });
+        }
+    }
 
     //adds eventlistener to todoBtn, after clicking it, 
     //it activates todoFactory to create a todo object!
