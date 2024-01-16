@@ -11,6 +11,17 @@
  when a user selects a different category, all the to-do items belonging in that category (via class) should load
  and prior to this should also wipe out the #todoDiv from ALL to-do items
  so in other words, clicking on a category activates deleteAlltodos() and loadToDos(category)
+
+ implement local storage saving for categories and todos: 
+ https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#example
+
+ 1. detect if there's any existing categories in local storage 
+ 1a. if there is, load those categories (and later the todos) using .getItem
+
+ 2. populateStorage with new categories by using .setItem(key, value);
+ 3. Use variable.onchange = populateStorage as a handler on each form element so that 
+ the data and styling are updated whenever their value is changed.
+
 */
 
 import './style.css';
@@ -27,6 +38,10 @@ import localeEn from 'air-datepicker/locale/en';
 
     });
 })();
+
+function populateStorage(){
+//implement storing categories (would likely have to be the array itself)
+}
 
 
 //this creates a prompt for the user to fill in category name
@@ -74,6 +89,10 @@ const categoryFactory = (() => {
         }
 
         categoryArray.push(categoryObj);
+
+        if (!localStorage.getItem('category')){
+            populateStorage();
+        }
 
         return category;
     };
